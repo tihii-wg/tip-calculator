@@ -6,7 +6,7 @@ import { SelectPercentage } from "./SelectPercentage";
 import { BillComponent } from "./BillComponent";
 
 function App() {
-  const [bill, setBill] = useState(0);
+  const [bill, setBill] = useState("0");
   const [percent, setPercent] = useState("0");
   const [friendsPercent, setFriendPercent] = useState("0");
 
@@ -14,12 +14,13 @@ function App() {
 
   let tip = (bill * totalPercent) / 100;
 
-  let totalBill = Math.round(+bill * (1 + totalPercent / 100));
+  let totalBill = +bill + tip;
+  //Math.round(+bill * (1 + totalPercent / 100));
 
-  console.log(totalBill, bill, totalPercent);
+	console.log(`totalbill ${ totalBill }, bill ${bill}, tip ${tip}`);
 
   const resetHandler = () => {
-    setBill(0);
+    setBill("0");
     setPercent("0");
     setFriendPercent("0");
   };
