@@ -17,8 +17,6 @@ function App() {
   let totalBill = +bill + tip;
   //Math.round(+bill * (1 + totalPercent / 100));
 
-	console.log(`totalbill ${ totalBill }, bill ${bill}, tip ${tip}`);
-
   const resetHandler = () => {
     setBill("0");
     setPercent("0");
