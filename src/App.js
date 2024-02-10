@@ -1,17 +1,45 @@
+import { useState } from "react";
 import "./App.css";
+import { ResetComponent } from "./ResetComponent";
+import { OutPutComponent } from "./OutPutComponent";
+import { SelectPercentage } from "./SelectPercentage";
+import { BillComponent } from "./BillComponent";
 
 function App() {
+  const [bill, setBill] = useState(0);
+  const [percent, setPercent] = useState("0");
+  const [friendsPercent, setFriendPercent] = useState("0");
+
+  let totalPercent = (Number(percent) + Number(friendsPercent)) / 2;
+
+  let tip = (bill * totalPercent) / 100;
+
+  let totalBill = Math.round(+bill * (1 + totalPercent / 100));
+
+  console.log(totalBill, bill, totalPercent);
+
+  const resetHandler = () => {
+    setBill(0);
+    setPercent("0");
+    setFriendPercent("0");
+  };
+
   return (
     <div className="App">
-      <BillComponent />
-      <SelectPercentage>
+      <BillComponent bill={bill} setBill={setBill} />
+      <SelectPercentage percent={percent} setPercent={setPercent}>
         <span>How did you like the service?</span>
       </SelectPercentage>
-      <SelectPercentage>
+      <SelectPercentage percent={friendsPercent} setPercent={setFriendPercent}>
         <span>How did you friends like the service?</span>
       </SelectPercentage>
-      <OutPutComponent />
-      <ResetComponent>
+      <OutPutComponent
+        bill={bill}
+        totalPercent={totalPercent}
+        totalBill={totalBill}
+        tip={tip}
+      />
+      <ResetComponent resetHandler={resetHandler}>
         <span>Reset</span>
       </ResetComponent>
     </div>
@@ -19,42 +47,3 @@ function App() {
 }
 
 export default App;
-
-function BillComponent() {
-  return (
-    <div>
-      <span>How much was the bill?</span>
-      <input type="text" />
-    </div>
-  );
-}
-
-function SelectPercentage({ children }) {
-  return (
-    <div>
-      {children}
-      <select>
-        <option>Dissatisfied (0%)</option>
-        <option>It was ok (5%)</option>
-        <option>It was good (10%) </option>
-        <option>Absolutely amazing (20%) </option>
-      </select>
-    </div>
-  );
-}
-
-function OutPutComponent() {
-  return (
-    <div>
-      <h3>You pay 92$ (80$ + 12$ tip)</h3>
-    </div>
-  );
-}
-
-function ResetComponent({ children }) {
-  return (
-    <div>
-      <button>{children}</button>
-    </div>
-  );
-}
