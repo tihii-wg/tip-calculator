@@ -28,7 +28,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div>
       <BillComponent bill={bill} onSetBill={onSetBill} />
       <SelectPercentage percent={percent} setPercent={setPercent}>
         <span>How did you like the service?</span>
