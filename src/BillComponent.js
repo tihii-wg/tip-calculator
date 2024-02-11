@@ -1,6 +1,6 @@
 export function BillComponent({ bill, onSetBill }) {
   const onSetBillHandler = (e) => {
-    onSetBill(e.currentTarget.value);
+    onSetBill(Number(e.currentTarget.value));
   };
   return (
     <div>

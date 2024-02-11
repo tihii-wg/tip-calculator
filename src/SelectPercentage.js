@@ -1,7 +1,7 @@
 export function SelectPercentage({ percent, setPercent, children }) {
 	
   const onSetPercentHandler = (e) => {
-    setPercent(e.target.value);
+    setPercent(Number(e.target.value));
   };
 
   return (

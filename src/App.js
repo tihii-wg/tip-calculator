@@ -6,19 +6,19 @@ import { SelectPercentage } from "./SelectPercentage";
 import { BillComponent } from "./BillComponent";
 
 function App() {
-  const [bill, setBill] = useState("0");
-  const [percent, setPercent] = useState("0");
-  const [friendsPercent, setFriendPercent] = useState("0");
+  const [bill, setBill] = useState("");
+  const [percent, setPercent] = useState(0);
+  const [friendsPercent, setFriendPercent] = useState(0);
 
-  let totalPercent = (Number(percent) + Number(friendsPercent)) / 2;
+  let totalPercent = (percent + friendsPercent) / 2;
 
   let tip = (bill * totalPercent) / 100;
 
-  let totalBill = +bill + tip;
+  let totalBill = bill + tip;
   //Math.round(+bill * (1 + totalPercent / 100));
 
   const resetCalc = () => {
-    setBill("0");
+    setBill("");
     setPercent("0");
     setFriendPercent("0");
   };
@@ -36,15 +36,19 @@ function App() {
       <SelectPercentage percent={friendsPercent} setPercent={setFriendPercent}>
         <span>How did you friends like the service?</span>
       </SelectPercentage>
-      <OutPutComponent
-        bill={bill}
-        totalPercent={totalPercent}
-        totalBill={totalBill}
-        tip={tip}
-      />
-      <ResetComponent resetHandler={resetCalc}>
-        <span>Reset</span>
-      </ResetComponent>
+      {bill && (
+        <>
+          <OutPutComponent
+            bill={bill}
+            totalPercent={totalPercent}
+            totalBill={totalBill}
+            tip={tip}
+          />
+          <ResetComponent resetHandler={resetCalc}>
+            <span>Reset</span>
+          </ResetComponent>
+        </>
+      )}
     </div>
   );
 }
