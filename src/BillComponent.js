@@ -1,4 +1,9 @@
-export function BillComponent({ bill, setBill }) {
+export function BillComponent({ bill, onSetBill }) {
+
+	
+  const onSetBillHandler = (e) => {
+    onSetBill(e.currentTarget.value);
+  };
   return (
     <div>
       <span>How much was the bill?</span>
@@ -6,9 +11,7 @@ export function BillComponent({ bill, setBill }) {
         type="text"
         placeholder="0"
         value={bill}
-        onChange={(e) => {
-          setBill(e.currentTarget.value);
-        }}
+        onChange={onSetBillHandler}
       />
     </div>
   );

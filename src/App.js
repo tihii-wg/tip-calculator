@@ -17,15 +17,19 @@ function App() {
   let totalBill = +bill + tip;
   //Math.round(+bill * (1 + totalPercent / 100));
 
-  const resetHandler = () => {
+  const resetCalc = () => {
     setBill("0");
     setPercent("0");
     setFriendPercent("0");
   };
 
+  const onSetBill = (value) => {
+    setBill(value);
+  };
+
   return (
     <div className="App">
-      <BillComponent bill={bill} setBill={setBill} />
+      <BillComponent bill={bill} onSetBill={onSetBill} />
       <SelectPercentage percent={percent} setPercent={setPercent}>
         <span>How did you like the service?</span>
       </SelectPercentage>
@@ -38,7 +42,7 @@ function App() {
         totalBill={totalBill}
         tip={tip}
       />
-      <ResetComponent resetHandler={resetHandler}>
+      <ResetComponent resetHandler={resetCalc}>
         <span>Reset</span>
       </ResetComponent>
     </div>
